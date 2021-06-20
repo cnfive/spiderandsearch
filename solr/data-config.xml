@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<dataConfig>
+<!-- 数据源配置 -->
+
+              
+<dataSource name="source1"  type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/db1"  user="cnfive" password="108514901"/>
+ <document> 
+ 
+ <entity name="spider_info"  dataSource="source1" pk="id"   query="select id, title,img,price,url,store,date2 from spider where tag is not null"
+        deltaImportQuery="select * from spider  where tag is not null and id='${dih.delta.id}'"
+        deltaQuery="SELECT id FROM spider where tag is not null and date2 >'${dataimporter.last_index_time}'"
+        deletedPkQuery="select id from spider   where tag is not null and  is_delete=1 "
+        > 
+        <field column="id" name="id" /> 
+        <field column="title" name="s_title" /> 
+        <field column="img" name="s_img" /> 
+        <field column="price" name="s_price" /> 
+        <field column="url" name="s_url" /> 
+        <field column="store" name="s_store" /> 
+        <field column="date2" name='last_modify_date' dateTimeFormat="yyyy-MM-dd HH:mm:ss" />
+        </entity>
+        </document>
+    
+    
+
+</dataConfig>
